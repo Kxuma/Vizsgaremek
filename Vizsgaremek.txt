@@ -1,0 +1,8 @@
+Csoport tagok : 
+- Fidrus Adrián
+- Nagy Gábor
+
+Vizsgaremek projekt :
+	- Egy online közösségi platform ahol a felhasználók feltehetnek kérdéseket,
+	  kifejhetik véleményüket, kereshetnek külön féle forumok között és kommunikálhatnak más felhasználókkal.
+
