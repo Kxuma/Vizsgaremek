@@ -14,7 +14,7 @@
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    background-color: #4CAF50;
+    background-color: #280137;
     color: white;
     border: none;
     border-radius: 5px;
@@ -22,9 +22,19 @@
   }
   
   .auth-buttons button:hover {
-    background-color: #45a049;
+    background-color: #ADD8E6;
+  }
+
+  .close-button{
+    background-color: rgb(166, 3, 3);
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
   }
   
+ .close-button:hover{
+  background-color: red;
+ }
+
   form {
     display: flex;
     flex-direction: column;

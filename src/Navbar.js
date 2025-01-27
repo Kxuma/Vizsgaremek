@@ -9,6 +9,7 @@ const Navbar = ({ onSelectTopic }) => {
     <nav className="navbar">
       <div className="navbar-left">
         {/* Témák legördülő menüje */}
+        <img id='imgNyul' src="nyul.ico" alt="LogokKep" />
         <select onChange={(e) => onSelectTopic(e.target.value)} defaultValue="">
           <option value="" disabled>Válassz témát</option>
           <option value="React">React</option>
