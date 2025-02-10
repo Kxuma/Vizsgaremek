@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "4GFSRU2yuno=",
+  "dgSpecHash": "7dzBm6Nwdok=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Tanulo\\GitWorkDir\\ForumApi\\Vizsgaremek\\Vizsgaremek\\ForumApi\\ForumApi.csproj",
+  "projectFilePath": "C:\\Users\\Tanulo\\Desktop\\Vizsgaremek\\Vizsgaremek\\ForumApi\\ForumApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Tanulo\\.nuget\\packages\\bouncycastle.cryptography\\2.3.1\\bouncycastle.cryptography.2.3.1.nupkg.sha512",
     "C:\\Users\\Tanulo\\.nuget\\packages\\google.protobuf\\3.26.1\\google.protobuf.3.26.1.nupkg.sha512",
