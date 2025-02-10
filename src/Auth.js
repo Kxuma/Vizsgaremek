@@ -20,13 +20,19 @@ const Auth = ({ onLogin, onRegister, onClose }) => {
     }
   };
 
+  const switchForm = (form) => {
+    setCurrentForm(form);
+    setUsername('');
+    setPassword('');
+  };
+
   return (
     <div className="auth-container">
       {/* Alapértelmezett gombok a bejelentkezéshez és regisztrációhoz */}
       {currentForm === null && (
         <div className="auth-buttons">
-          <button onClick={() => setCurrentForm('login')}>Bejelentkezés</button>
-          <button onClick={() => setCurrentForm('register')}>Regisztráció</button>
+          <button onClick={() => switchForm('login')}>Bejelentkezés</button>
+          <button onClick={() => switchForm('register')}>Regisztráció</button>
         </div>
       )}
 

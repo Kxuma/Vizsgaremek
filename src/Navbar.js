@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
-import './Navbar.css';
-import Auth from './Auth';  // Auth komponens importálása
+import React, { useState } from "react";
+import "./Navbar.css";
+import Auth from "./Auth"; // Auth komponens importálása
 
 const Navbar = ({ onSelectTopic }) => {
   const [showAuth, setShowAuth] = useState(false); // Auth űrlap megjelenítése
@@ -9,9 +9,11 @@ const Navbar = ({ onSelectTopic }) => {
     <nav className="navbar">
       <div className="navbar-left">
         {/* Témák legördülő menüje */}
-        <img id='imgNyul' src="nyul.ico" alt="LogokKep" />
+        <img id="imgNyul" src="/nyul.ico" alt="LogokKep" />
         <select onChange={(e) => onSelectTopic(e.target.value)} defaultValue="">
-          <option value="" disabled>Válassz témát</option>
+          <option value="" disabled>
+            Válassz témát
+          </option>
           <option value="React">React</option>
           <option value="JavaScript">JavaScript</option>
           <option value="CSS">CSS</option>
@@ -20,11 +22,21 @@ const Navbar = ({ onSelectTopic }) => {
 
       <div className="navbar-right">
         {/* Bejelentkezés / Regisztráció gombok */}
-        <button onClick={() => setShowAuth(true)}>Bejelentkezés / Regisztráció</button>
+        <button className="loginBtn" onClick={() => setShowAuth(true)}>
+          Bejelentkezés / Regisztráció
+        </button>
       </div>
 
       {/* Auth komponens */}
-      {showAuth && <Auth onClose={() => setShowAuth(false)} />}
+      {showAuth && (
+        <div>
+          <div
+            className="auth-overlay"
+            onClick={() => setShowAuth(false)}
+          ></div>
+          <Auth onClose={() => setShowAuth(false)} />
+        </div>
+      )}
     </nav>
   );
 };
