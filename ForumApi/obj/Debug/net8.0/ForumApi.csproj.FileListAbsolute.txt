@@ -260,3 +260,16 @@ C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\refint\Foru
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\ForumApi.pdb
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\ForumApi.genruntimeconfig.cache
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\ref\ForumApi.dll
+C:\Users\Tanulo\Desktop\cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+C:\Users\Tanulo\Desktop\cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+C:\Users\Tanulo\Desktop\cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+C:\Users\Tanulo\Desktop\cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+C:\Users\Tanulo\Desktop\cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+C:\Users\Tanulo\Desktop\cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+C:\Users\Tanulo\Desktop\cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Tanulo\Desktop\cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Tanulo\Desktop\cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Tanulo\Desktop\cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Tanulo\Desktop\cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Tanulo\Desktop\cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Tanulo\Desktop\cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll
