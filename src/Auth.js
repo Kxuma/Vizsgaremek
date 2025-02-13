@@ -125,9 +125,9 @@ const Auth = ({ onLogin, onClose }) => {
             />
             <label htmlFor="acceptTerms">
               Elfogadom a{' '}
-              <a href="/Feltetelek" target="_blank" rel="noopener noreferrer">
+              <Link to="/Feltetelek" target="_blank" rel="noopener noreferrer">
   felhasználói feltételeket
-</a>
+</Link>
             </label>
           </div>
 

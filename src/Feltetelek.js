@@ -1,6 +1,7 @@
 // Feltetelek.js
 import React, { useState } from 'react';
 import './Feltetelek.css';  // Importáljuk a CSS fájlt
+import { Link } from 'react-router-dom';
 
 const Feltetelek = () => {
   // State a lenyitható szekciók kezeléséhez
@@ -81,7 +82,7 @@ const Feltetelek = () => {
         </li>
       </ul>
 
-      <a href="/" className="back-button">Vissza a kezdőlapra</a>
+      <Link to={"/"}  className="back-button">Vissza a kezdőlapra</Link>
     </div>
   );
 };
