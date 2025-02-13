@@ -1,0 +1,86 @@
+/* Feltetelek.css */
+
+/* A teljes oldal konténerének stílusai */
+.feltetelek-container {
+    background-color: #f9f9f9;
+    color: #333;
+    font-family: Arial, sans-serif;
+    padding: 40px;
+    margin: 0 auto;
+    max-width: 800px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-top: 50px;
+  }
+  
+  /* Cím stílusa */
+  .feltetelek-title {
+    font-size: 2.5rem;
+    color: #222;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  /* Leíró szöveg stílusa */
+  .feltetelek-description {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Lista stílusai */
+  .feltetelek-list {
+    list-style-type: none;  /* Az alapértelmezett listajelölő eltüntetése */
+    padding: 0;
+  }
+  
+  .feltetelek-list li {
+    margin-bottom: 20px;
+  }
+  
+  /* Gombok, amik a szekciók lenyitásáért felelősek */
+  .section-toggle {
+    background-color: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: #007bff;
+    text-align: left;
+    padding: 10px;
+    width: 100%;
+    cursor: pointer;
+    transition: color 0.3s ease;
+  }
+  
+  .section-toggle:hover {
+    color: #0056b3;
+  }
+  
+  .section-content {
+    margin-top: 10px;
+    font-size: 1rem;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Gomb a kezdőlapra való visszavitelhez */
+  .back-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 20px;
+    background-color: #007bff;
+    color: black; /* A gomb szövege fekete */
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 8px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+  }
+  
+  .back-button:hover {
+    background-color: #0056b3;
+  }
+  
