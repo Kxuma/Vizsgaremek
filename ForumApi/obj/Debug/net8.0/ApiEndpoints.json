@@ -1,16 +1,16 @@
 [
   {
     "ContainingType": "ForumApi.Controllers.CommentController",
-    "Method": "Post",
-    "RelativePath": "api/Comment",
-    "HttpMethod": "POST",
+    "Method": "DeleteComment",
+    "RelativePath": "api/Comment/Delete",
+    "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
-        "Name": "createCommentDto",
-        "Type": "ForumApi.Models.Dto\u002BCreateCommentDto",
-        "IsRequired": true
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
       }
     ],
     "ReturnTypes": [
@@ -28,7 +28,7 @@
   {
     "ContainingType": "ForumApi.Controllers.CommentController",
     "Method": "GetAllComments",
-    "RelativePath": "api/Comment",
+    "RelativePath": "api/Comment/Get",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -36,6 +36,32 @@
     "ReturnTypes": [
       {
         "Type": "System.Collections.Generic.List\u00601[[ForumApi.Models.Comment, ForumApi, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ForumApi.Controllers.CommentController",
+    "Method": "PostComment",
+    "RelativePath": "api/Comment/Post",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "createCommentDto",
+        "Type": "ForumApi.Models.Dto\u002BCreateCommentDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ForumApi.Models.Comment",
         "MediaTypes": [
           "text/plain",
           "application/json",

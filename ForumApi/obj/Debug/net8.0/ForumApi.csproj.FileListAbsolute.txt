@@ -131,7 +131,6 @@ C:\Users\Tanulo\GitWorkDir\ForumApi\Vizsgaremek\Vizsgaremek\ForumApi\obj\Debug\n
 C:\Users\Tanulo\GitWorkDir\ForumApi\Vizsgaremek\Vizsgaremek\ForumApi\obj\Debug\net8.0\ref\ForumApi.dll
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\appsettings.json
-C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\ForumApi.staticwebassets.endpoints.json
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\ForumApi.exe
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\ForumApi.deps.json
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\bin\Debug\net8.0\ForumApi.runtimeconfig.json
@@ -250,14 +249,11 @@ C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\ForumApi.so
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\scopedcss\bundle\ForumApi.styles.css
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\staticwebassets.development.json
-C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\staticwebassets.build.endpoints.json
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\staticwebassets\msbuild.ForumApi.Microsoft.AspNetCore.StaticWebAssets.props
-C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\staticwebassets\msbuild.ForumApi.Microsoft.AspNetCore.StaticWebAssetEndpoints.props
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\staticwebassets\msbuild.build.ForumApi.props
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargeting.ForumApi.props
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.ForumApi.props
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\staticwebassets.pack.json
-C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\ForumApi.csproj.Up2Date
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\ForumApi.dll
 C:\Users\Tanulo\Desktop\Cuccos\Vizsgaremek\ForumApi\obj\Debug\net8.0\refint\ForumApi.dll

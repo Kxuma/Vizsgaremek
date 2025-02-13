@@ -19,13 +19,14 @@ namespace ForumApi.Controllers {
 
         // POST method
 
-        [HttpPost]
-        public async Task<ActionResult<Comment>> Post(CreateCommentDto createCommentDto) {
+        [HttpPost("Post")]
+        public async Task<ActionResult<Comment>> PostComment(CreateCommentDto createCommentDto) {
             var comment = new Comment {
                 Id = createCommentDto.Id,
                 UId = createCommentDto.UId,
                 TId = createCommentDto.TId,
-                Text = createCommentDto.Text
+                Text = createCommentDto.Text,
+                CreatedTime = DateTime.Now,
             };
 
             _forumContext.Comments.Add(comment);
@@ -37,10 +38,27 @@ namespace ForumApi.Controllers {
 
         // GET method
 
-        [HttpGet]
+        [HttpGet("Get")]
         public async Task<ActionResult<List<Comment>>> GetAllComments() {
             var comments = await _forumContext.Comments.ToListAsync();
             return Ok(comments);
+        }
+
+        // DELETE method
+
+        [HttpDelete("Delete")]
+
+        public async Task<ActionResult<Comment>> DeleteComment(int id)
+        {
+            var comment = await _forumContext.Comments.SingleOrDefaultAsync(c => c.Id == id);
+
+            if (comment != null)
+            {
+                _forumContext.Comments.Remove(comment);
+                await _forumContext.SaveChangesAsync();
+                return Ok(new { message = "Sikeres törlés!" });
+            }
+            return NotFound(new { message = "Nincs ilyen comment." });
         }
     }
 }
