@@ -4465,11 +4465,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Tanulo\\Desktop\\cuccos\\Vizsgaremek\\ForumApi\\ForumApi.csproj",
+      "projectUniqueName": "C:\\Users\\Tanulo\\Desktop\\sigma\\Vizsgaremek\\ForumApi\\ForumApi.csproj",
       "projectName": "ForumApi",
-      "projectPath": "C:\\Users\\Tanulo\\Desktop\\cuccos\\Vizsgaremek\\ForumApi\\ForumApi.csproj",
+      "projectPath": "C:\\Users\\Tanulo\\Desktop\\sigma\\Vizsgaremek\\ForumApi\\ForumApi.csproj",
       "packagesPath": "C:\\Users\\Tanulo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Tanulo\\Desktop\\cuccos\\Vizsgaremek\\ForumApi\\obj\\",
+      "outputPath": "C:\\Users\\Tanulo\\Desktop\\sigma\\Vizsgaremek\\ForumApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

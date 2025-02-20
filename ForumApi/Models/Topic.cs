@@ -11,7 +11,7 @@ public partial class Topic
 
     public string Description { get; set; } = null!;
 
-    public int Uid { get; set; }
+    public string Uid { get; set; } = null!;
 
     public DateTime CreatedTime { get; set; }
 }
