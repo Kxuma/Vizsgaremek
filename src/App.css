@@ -1,29 +1,48 @@
 .App {
+  height: 100%;
   font-family: Arial, sans-serif;
-  background-color: white; /* Fehér háttér az oldalnak */
-  color: black; /* Fekete szöveg */
+  background-color:  #2D283E;
   margin: 0 auto;
+}
+
+h1, h2{
+  color: #802bb1;
+}
+
+h2 {
+  margin-top: 40px;
+}
+
+p {
+  color: #d1d7E0;
+}
+
+html{
+  background-color: #2D283E;
+  color: #454f6f;
 }
 
 .content {
   padding: 20px;
+  margin-top: 80px;
 }
 
 textarea {
   width: 100%;
   padding: 10px;
   margin-top: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid #802bb1;
   border-radius: 5px;
   box-sizing: border-box;
+  background-color: #4c495d;
 }
 
 .commentButton {
   padding: 10px 20px;
   margin-top: 10px;
   border: none;
-  background-color: #4caf50;
-  color: white;
+  background-color: #802bb1;
+  color: #d1d7E0;
   font-size: 16px;
   cursor: pointer;
   border-radius: 5px;
@@ -32,7 +51,7 @@ textarea {
 }
 
 .commentButton:hover {
-  background-color: #45a049;
+  background-color: #7728a4;
 }
 
 ul {

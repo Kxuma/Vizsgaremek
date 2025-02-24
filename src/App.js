@@ -3,6 +3,7 @@ import './App.css';
 import Home from './Home';
 import Feltetelek from './Feltetelek';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import UjTema from './UjTema';
 
 function App() {
   return (
@@ -11,8 +12,7 @@ function App() {
 
         <Routes>
           <Route path="/" element={<Home/>}/>
-        </Routes>
-        <Routes>
+          <Route path="/UjTema" element={<UjTema/>}/>
           <Route path="/Feltetelek" element={<Feltetelek/>}/>
         </Routes>
       </BrowserRouter>

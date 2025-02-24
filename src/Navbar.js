@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import Auth from "./Auth"; // Auth komponens importálása
+import { Link } from "react-router-dom";
 
 const Navbar = ({ onSelectTopic }) => {
   const [showAuth, setShowAuth] = useState(false); // Auth űrlap megjelenítése
@@ -18,6 +19,9 @@ const Navbar = ({ onSelectTopic }) => {
           <option value="JavaScript">JavaScript</option>
           <option value="CSS">CSS</option>
         </select>
+          <Link to='/UjTema' className='btn btn-sm btn-outline-secondary'>
+            Új téma létrehozása
+          </Link>
       </div>
 
       <div className="navbar-right">
@@ -40,5 +44,6 @@ const Navbar = ({ onSelectTopic }) => {
     </nav>
   );
 };
+
 
 export default Navbar;

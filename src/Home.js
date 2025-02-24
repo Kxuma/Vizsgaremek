@@ -92,7 +92,7 @@ export default function Home() {
     <div>
       <Navbar onSelectTopic={handleTopicSelect} />
 
-      <div className="content" style={{ marginTop: "80px" }}>
+      <div className="content" /*ittvolt eez a fos*/>
         <h1>{selectedTopic || "Fórum"}</h1>
 
         {user ? <p>Üdvözlünk, {user}!</p> : <p>Nem vagy bejelentkezve</p>}
