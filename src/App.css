@@ -5,8 +5,14 @@
   margin: 0 auto;
 }
 
+body{
+  color: #d1d7E0;
+}
+
 h1, h2{
   color: #802bb1;
+  margin-top: 80px;
+  margin-bottom: 10px;
 }
 
 h2 {
@@ -50,8 +56,12 @@ textarea {
   touch-action: manipulation;
 }
 
+#topicName{
+  background-color: #4c495d;
+  border: 1px solid #802bb1;
+}
 .commentButton:hover {
-  background-color: #7728a4;
+  background-color: #4c0275;
 }
 
 ul {
@@ -89,4 +99,8 @@ body.modal-open {
   overflow: hidden;
   padding-right: 17px;
   width: 100vw;
+}
+
+.label{
+  color: #d1d7E0;
 }
