@@ -56,3 +56,7 @@
   height: 50px;
   margin-right: 15px;
 }
+
+.loginBtn{
+  position: fixed;
+}

@@ -26,57 +26,59 @@ const Feltetelek = () => {
 
       <ul className="feltetelek-list">
         {/* 1. Részvételi feltételek */}
-        <li>
+        <li className='felsorolas'>
           <button 
             className="section-toggle" 
             onClick={() => toggleSection(1)}>
             1. Részvételi feltételek
           </button>
           {openSection === 1 && (
-            <div className="section-content">
-              <p>A részvételi feltételek ismertetése...</p>
+            <div>
+              <p className="section-content">Légy tisztelettudó! Tilos a spam, a gyűlöletbeszéd és az illegális tartalom. A moderátorok döntése végleges.</p>
             </div>
           )}
         </li>
 
         {/* 2. Jogi nyilatkozatok */}
-        <li>
+        <li className='felsorolas'>
           <button 
             className="section-toggle" 
             onClick={() => toggleSection(2)}>
             2. Jogi nyilatkozatok
           </button>
           {openSection === 2 && (
-            <div className="section-content">
-              <p>A jogi nyilatkozatok tartalma...</p>
+            <div>
+              <p className="section-content">A fórum tartalmát a felhasználók hozzák létre, ezért nem vállalunk felelősséget a bejegyzések pontosságáért vagy jogszerűségéért.</p>
             </div>
           )}
         </li>
 
         {/* 3. Adatvédelmi irányelvek */}
-        <li>
+        <li className='felsorolas'>
           <button 
             className="section-toggle" 
             onClick={() => toggleSection(3)}>
             3. Adatvédelmi irányelvek
           </button>
           {openSection === 3 && (
-            <div className="section-content">
-              <p>Az adatvédelmi irányelvek...</p>
+            <div>
+              <p className="section-content">A fórum sütiket és alapvető adatokat használ a működéshez. Nem adjuk el az adataidat harmadik félnek.</p>
             </div>
           )}
         </li>
 
         {/* 4. A felelősség kizárása */}
-        <li>
+        <li className='felsorolas'>
           <button 
             className="section-toggle" 
             onClick={() => toggleSection(4)}>
             4. A felelősség kizárása
           </button>
           {openSection === 4 && (
-            <div className="section-content">
-              <p>A felelősség kizárásának feltételei...</p>
+            <div>
+              <p className="section-content">A fórum használata saját felelősségre történik. Nem vállalunk felelősséget semmilyen káreseményért vagy problémáért, ami a használatból fakadhat.
+
+</p>
             </div>
           )}
         </li>

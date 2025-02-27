@@ -2,7 +2,7 @@
 
 /* A teljes oldal konténerének stílusai */
 .feltetelek-container {
-    background-color: #f9f9f9;
+    background-color: grey;
     color: #333;
     font-family: Arial, sans-serif;
     padding: 40px;
@@ -27,12 +27,14 @@
     line-height: 1.7;
     margin-bottom: 20px;
     text-align: center;
+    color: #222;
   }
   
   /* Lista stílusai */
   .feltetelek-list {
     list-style-type: none;  /* Az alapértelmezett listajelölő eltüntetése */
     padding: 0;
+    
   }
   
   .feltetelek-list li {
@@ -41,10 +43,11 @@
   
   /* Gombok, amik a szekciók lenyitásáért felelősek */
   .section-toggle {
-    background-color: transparent;
-    border: none;
+    background-color: grey;
+    border: 0.5px;
+    border-radius: 3px;
     font-size: 1.2rem;
-    color: #007bff;
+    color: #802bb1;
     text-align: left;
     padding: 10px;
     width: 100%;
@@ -53,17 +56,18 @@
   }
   
   .section-toggle:hover {
-    color: #0056b3;
+    color: #4c0275;
   }
   
   .section-content {
     margin-top: 10px;
     font-size: 1rem;
     line-height: 1.6;
-    background-color: #f4f4f4;
+    background-color: grey;
     padding: 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    color: #333;
   }
   
   /* Gomb a kezdőlapra való visszavitelhez */
@@ -71,8 +75,8 @@
     display: inline-block;
     margin-top: 30px;
     padding: 12px 20px;
-    background-color: #007bff;
-    color: black; /* A gomb szövege fekete */
+    background-color: #802bb1;
+    color: #d1d7E0; 
     font-size: 1rem;
     text-decoration: none;
     border-radius: 8px;
@@ -81,6 +85,11 @@
   }
   
   .back-button:hover {
-    background-color: #0056b3;
+    background-color: #4c0275;
   }
   
+.felsorolas{
+  border: 1px solid;
+  padding: 1px;
+  background-color: #802bb1;
+}
