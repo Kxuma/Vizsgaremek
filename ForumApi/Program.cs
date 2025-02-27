@@ -1,6 +1,8 @@
-
 using ForumApi.Models;
+using ForumApi.Services;
+using ForumApi.Services.IAuthService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -12,6 +14,14 @@ namespace ForumApi
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
+
+            builder.Services.AddScoped<IAuth, Auth>();
+            builder.Services.AddScoped<ITokenGenerator, TokenGenerator>();
+
+            builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<ForumContext>()
+              .AddDefaultTokenProviders();
+
+            builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("AuthSettings:JwtOptions"));
 
             var settingsSection = builder.Configuration.GetSection("AuthSettings:JwtOptions");
 
@@ -54,12 +64,11 @@ namespace ForumApi
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
-            builder.Services.AddDbContext<ForumContext>(option => 
+            builder.Services.AddDbContext<ForumContext>(option =>
             {
                 var connectionstring = builder.Configuration.GetConnectionString("MySql");
                 option.UseMySQL(connectionstring);
             });
-
 
             var app = builder.Build();
 

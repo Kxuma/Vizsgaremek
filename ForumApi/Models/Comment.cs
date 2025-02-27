@@ -14,4 +14,6 @@ public partial class Comment
     public string Text { get; set; } = null!;
 
     public DateTime CreatedTime { get; set; }
+
+
 }
