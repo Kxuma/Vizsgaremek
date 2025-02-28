@@ -146,7 +146,7 @@
   {
     "ContainingType": "ForumApi.Controllers.UserController",
     "Method": "AddRole",
-    "RelativePath": "api/User/AssignRole",
+    "RelativePath": "Felhaszn\u00E1l\u00F3k/AssignRole",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -167,7 +167,7 @@
   {
     "ContainingType": "ForumApi.Controllers.UserController",
     "Method": "LoginUser",
-    "RelativePath": "api/User/Login",
+    "RelativePath": "Felhaszn\u00E1l\u00F3k/Login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -183,7 +183,7 @@
   {
     "ContainingType": "ForumApi.Controllers.UserController",
     "Method": "AddNewUser",
-    "RelativePath": "api/User/Register",
+    "RelativePath": "Felhaszn\u00E1l\u00F3k/Register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
