@@ -16,9 +16,9 @@ const Navbar = ({ onSelectTopic }) => {
             <option value="" disabled>
               Válassz témát
             </option>
-            <option value="React">React</option>
-            <option value="JavaScript">JavaScript</option>
-            <option value="CSS">CSS</option>
+            <option value="0">React</option>
+            <option value="1">JavaScript</option>
+            <option value="2">CSS</option>
           </select>
           <Link to='/UjTema' className='btn btn-sm btn-outline-secondary'>
             Új téma létrehozása

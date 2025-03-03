@@ -6,7 +6,8 @@ export default function Home() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [selectedTopic, setSelectedTopic] = useState("");
-  const [user, setUser] = useState(null); // A bejelentkezett felhasználó
+  const [userId, setUserId] = useState(null); // A bejelentkezett felhasználó
+  const [userName, setUserName] = useState(null); // A bejelentkezett felhasználó
 
   // Kommentek lekérése a backendből (GET metódus)
   useEffect(() => {
@@ -25,8 +26,8 @@ export default function Home() {
 
     const newEntry = {
       text: newComment.trim(),
-      author: user || "Vendég",
-      topic: selectedTopic,  // A választott téma
+      uId: userId || "0",
+      tId: Number(selectedTopic),  // A választott téma
     };
 
     console.log("Küldött adat:", newEntry);  // Ellenőrzés a konzolban
@@ -71,21 +72,24 @@ export default function Home() {
   };
 
   const handleTopicSelect = (topic) => {
+    console.log(topic);
     if (topic !== selectedTopic) {
       setSelectedTopic(topic);
     }
   };
 
   // Bejelentkezés kezelése
-  const handleLogin = (username) => {
-    setUser(username); // A bejelentkezett felhasználó nevét tároljuk
-    localStorage.setItem("user", username);
+  const handleLogin = (userId, userName) => {
+    setUserId(userId); // A bejelentkezett felhasználó id-ját tároljuk
+    setUserName(userName); // A bejelentkezett felhasználó nevét tároljuk
+    localStorage.setItem("userId", userId);
+    localStorage.setItem("userName", userName);
   };
 
   // Regisztráció kezelése
-  const handleRegister = (username) => {
-    setUser(username); // A regisztrált felhasználó nevét tároljuk
-    localStorage.setItem("user", username);
+  const handleRegister = (userId) => {
+    setUserId(userId); // A regisztrált felhasználó nevét tároljuk
+    localStorage.setItem("userId", userId);
   };
 
   return (
@@ -93,9 +97,9 @@ export default function Home() {
       <Navbar onSelectTopic={handleTopicSelect} />
 
       <div className="content" /*ittvolt eez a fos*/>
-        <h1>{selectedTopic || "Fórum"}</h1>
+        <h1>{selectedTopic === "0" ? "React" : selectedTopic === "1" ? "JavaScript" : selectedTopic === "2" ? "CSS" : "Fórum"}</h1>
 
-        {user ? <p>Üdvözlünk, {user}!</p> : <p>Nem vagy bejelentkezve</p>}
+        {userName ? <p>Üdvözlünk, {userName}!</p> : <p>Nem vagy bejelentkezve</p>}
 
         <textarea
           value={newComment}

@@ -11,10 +11,17 @@ const Auth = ({ onLogin, onClose }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState('');
+  /*const [userId, setUserId] = useState(null); // A bejelentkezett felhasználó
+  const [userName, setUserName] = useState(null); // A bejelentkezett felhasználó*/
+
 
   const handleLogin = (e) => {
     e.preventDefault();
     setError('');
+    /*setUserId(userId); // A bejelentkezett felhasználó id-ját tároljuk
+    setUserName(userName); // A bejelentkezett felhasználó nevét tároljuk
+    localStorage.setItem("userId", userId);
+    localStorage.setItem("userName", userName);*/
 
     if (!username || !password) {
       setError('Minden mezőt ki kell tölteni!');
