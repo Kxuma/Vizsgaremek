@@ -40,20 +40,20 @@ namespace ForumApi.Services
             return new { result = "", message = "Sikertelen hozzárendelés." };
         }
 
-        public async Task<object> Login(LoginRequestDto loginRequestDto)
+        public async Task<object> Login(LoginRequestDto loginRequestDto) 
         {
             var user = await _context.ApplicationUsers.FirstOrDefaultAsync(user => user.NormalizedUserName == loginRequestDto.UserName.ToUpper());
 
             bool isValid = await userManager.CheckPasswordAsync(user, loginRequestDto.Password);
 
-            if (!isValid)
-            {
+            if (isValid) {
                 var roles = await userManager.GetRolesAsync(user);
                 var jwtToken = tokenGenerator.GenerateToken(user, roles);
 
-                return new { result = new { user.UserName, user.Email }, message = "Sikeres bejelentkezés.", token = jwtToken };
+                return new { result = new { user.UserName, user.Email }, message = "Sikeres beléptetés.", token = jwtToken };
             }
-            return new { result = "", message = "Nem regisztrált felhasználó.", token = "" };
+
+            return new { result = "", message = "Nem regisztrált.", token = "" };
         }
 
         public async Task<object> Register(RegisterRequestDto registerRequestDto)
