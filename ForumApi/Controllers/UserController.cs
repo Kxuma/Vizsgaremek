@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ForumApi.Controllers
 {
-    [Route("Felhasználók")]
+    [Route("api/Users")]
     [ApiController]
     public class UserController : ControllerBase
     {
