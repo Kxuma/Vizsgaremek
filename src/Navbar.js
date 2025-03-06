@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import Auth from "./Auth"; // Auth komponens importálása
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = ({ onSelectTopic }) => {
   const [showAuth, setShowAuth] = useState(false); // Auth űrlap megjelenítése
+  const token = localStorage.getItem("token");
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    navigate("/")
+  }
 
   return (
     <div>
@@ -26,10 +34,22 @@ const Navbar = ({ onSelectTopic }) => {
         </div>
 
         <div className="navbar-right">
+
+          {/* 
+          Ezzel majd akkor vissza lehet decode és a nevet meg lehet jeleníteni
+          {localStorage.getItem("token")}
+          */}
+
+
+
+          
           {/* Bejelentkezés / Regisztráció gombok */}
-          <button className="loginBtn" onClick={() => setShowAuth(true)}>
-            Bejelentkezés / Regisztráció
-          </button>
+          {token ? <button className="loginBtn" onClick={handleLogout}>Kijelentkezés</button> : (
+            <button className="loginBtn" onClick={() => setShowAuth(true)}>
+              Bejelentkezés / Regisztráció
+            </button>
+            )
+          }
         </div>
 
         {/* Auth komponens */}

@@ -11,7 +11,7 @@ export default function Home() {
 
   // Kommentek lekérése a backendből (GET metódus)
   useEffect(() => {
-    fetch("https://localhost:7260/api/Comment/Get")  // API kommentek lekérése
+    fetch("https://localhost:7260/api/Comment/Get")
       .then((response) => response.json())
       .then((data) => setComments(data))
       .catch((error) => console.error("Error fetching comments:", error));
@@ -96,7 +96,7 @@ export default function Home() {
     <div>
       <Navbar onSelectTopic={handleTopicSelect} />
 
-      <div className="content" /*ittvolt eez a fos*/>
+      <div className="content" >
         <h1>{selectedTopic === "0" ? "React" : selectedTopic === "1" ? "JavaScript" : selectedTopic === "2" ? "CSS" : "Fórum"}</h1>
 
         {userName ? <p>Üdvözlünk, {userName}!</p> : <p>Nem vagy bejelentkezve</p>}
