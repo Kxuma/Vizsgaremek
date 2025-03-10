@@ -8,6 +8,13 @@ export default function Home() {
   const [selectedTopic, setSelectedTopic] = useState("");
   const [userId, setUserId] = useState(null); // A bejelentkezett felhasználó
   const [userName, setUserName] = useState(null); // A bejelentkezett felhasználó
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  let token = null;
+
+  if (isLoggedIn) {
+    token = localStorage.getItem("token");
+  }
+
 
   // Kommentek lekérése a backendből (GET metódus)
   useEffect(() => {
@@ -15,7 +22,7 @@ export default function Home() {
       .then((response) => response.json())
       .then((data) => setComments(data))
       .catch((error) => console.error("Error fetching comments:", error));
-  }, []);
+  }, [isLoggedIn]);
 
   // Kommentek hozzáadása a backendbe (POST metódus)
   const handleAddComment = () => {
@@ -94,22 +101,26 @@ export default function Home() {
 
   return (
     <div>
-      <Navbar onSelectTopic={handleTopicSelect} />
+      <Navbar onSelectTopic={handleTopicSelect} setIsLoggedIn={setIsLoggedIn} />
 
       <div className="content" >
         <h1>{selectedTopic === "0" ? "React" : selectedTopic === "1" ? "JavaScript" : selectedTopic === "2" ? "CSS" : "Fórum"}</h1>
 
         {userName ? <p>Üdvözlünk, {userName}!</p> : <p>Nem vagy bejelentkezve</p>}
 
-        <textarea
-          value={newComment}
-          onChange={(e) => setNewComment(e.target.value)}
-          placeholder="Írd ide a hozzászólásodat..."
-          rows="4"
-          cols="50"
-        />
-        <br />
-        <button className="commentButton" onClick={handleAddComment}>Hozzászólás</button>
+        {isLoggedIn ?
+          <div>
+            <textarea
+              value={newComment}
+              onChange={(e) => setNewComment(e.target.value)}
+              placeholder="Írd ide a hozzászólásodat..."
+              rows="4"
+              cols="50"
+            />
+            <br />
+            <button className="commentButton" onClick={handleAddComment}>Hozzászólás</button>
+          </div>
+          : <p>Addig nem tudsz hozzászólást írni amíg nem vagy bejelentkezve!</p>}
 
         <h2>Hozzászólások:</h2>
         <ul>
@@ -119,11 +130,13 @@ export default function Home() {
             comments.map((comment) => (
               <li key={comment.id} className="comment">
                 <strong>{comment.author}:</strong> {comment.text}
-                <button
+                <button className="KukaIcon"
                   onClick={() => handleDeleteComment(comment.id)}
                   style={{ marginLeft: "10px", color: "red" }}
                 >
-                  Törlés
+                   <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16"  fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
+                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                  </svg>
                 </button>
               </li>
             ))

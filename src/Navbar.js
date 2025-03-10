@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Navbar.css";
 import Auth from "./Auth"; // Auth komponens importálása
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-const Navbar = ({ onSelectTopic }) => {
+const Navbar = ({ onSelectTopic, setIsLoggedIn }) => {
   const [showAuth, setShowAuth] = useState(false); // Auth űrlap megjelenítése
   const token = localStorage.getItem("token");
 
-  const navigate = useNavigate();
-
   const handleLogout = () => {
     localStorage.removeItem("token");
-    navigate("/")
+    setIsLoggedIn(false);
   }
+  
 
   return (
     <div>
@@ -45,7 +44,7 @@ const Navbar = ({ onSelectTopic }) => {
           
           {/* Bejelentkezés / Regisztráció gombok */}
           {token ? <button className="loginBtn" onClick={handleLogout}>Kijelentkezés</button> : (
-            <button className="loginBtn" onClick={() => setShowAuth(true)}>
+            <button className="loginBtn" onClick={() => {setShowAuth(true)}}>
               Bejelentkezés / Regisztráció
             </button>
             )
@@ -62,7 +61,7 @@ const Navbar = ({ onSelectTopic }) => {
             className="auth-overlay"
             onClick={() => setShowAuth(false)}
           ></div>
-          <Auth onClose={() => setShowAuth(false)} />
+          <Auth onClose={() => setShowAuth(false)} setIsLoggedIn={setIsLoggedIn}/>
         </div>
       )}
     </div>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Auth.css';
 
-const Auth = ({ onClose }) => {
+const Auth = ({ onClose, setIsLoggedIn }) => {
   const [currentForm, setCurrentForm] = useState(null);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
@@ -93,6 +93,7 @@ const Auth = ({ onClose }) => {
       console.log(response);
       localStorage.setItem("username", response.result.userName);
       localStorage.setItem("token", response.token);
+      setIsLoggedIn(true)
       onClose()
 
     })
