@@ -73,6 +73,37 @@
   },
   {
     "ContainingType": "ForumApi.Controllers.TopicController",
+    "Method": "Put",
+    "RelativePath": "api/Topic/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updateTopicDto",
+        "Type": "ForumApi.Models.Dto\u002BUpdateTopicDto",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ForumApi.Models.Topic",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ForumApi.Controllers.TopicController",
     "Method": "DeleteTopic",
     "RelativePath": "api/Topic/Delete",
     "HttpMethod": "DELETE",

@@ -17,7 +17,7 @@ namespace ForumApi.Controllers {
         }
 
 
-        // POST method
+        // POST
 
         [HttpPost("Post")]
         public async Task<ActionResult<Comment>> PostComment(CreateCommentDto createCommentDto) {
@@ -36,7 +36,7 @@ namespace ForumApi.Controllers {
         }
 
 
-        // GET method
+        // GET
 
         [HttpGet("Get")]
         public async Task<ActionResult<List<Comment>>> GetAllComments() {
@@ -44,7 +44,7 @@ namespace ForumApi.Controllers {
             return Ok(comments);
         }
 
-        // DELETE method
+        // DELETE
 
         [HttpDelete("Delete")]
 
@@ -59,6 +59,22 @@ namespace ForumApi.Controllers {
                 return Ok(new { message = "Sikeres törlés!" });
             }
             return NotFound(new { message = "Nincs ilyen comment." });
+        }
+
+        // PUT
+
+        [HttpPut("{id}")]
+
+        public async Task<ActionResult<Comment>> Put(UpdateCommentDto updateCommentDto, int id) {
+            var existingCom = await _forumContext.Comments.FirstOrDefaultAsync(com => com.Id == id);
+
+            if (existingCom != null) {
+                existingCom.Text = updateCommentDto.Text;
+                _forumContext.Comments.Update(existingCom);
+                await _forumContext.SaveChangesAsync();
+                return Ok(existingCom);
+            }
+            return NotFound();
         }
     }
 }

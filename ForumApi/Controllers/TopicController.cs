@@ -17,7 +17,7 @@ namespace ForumApi.Controllers
             _forumContext = forumContext;
         }
 
-        // POST method
+        // POST
 
         [HttpPost("Post")]
         public async Task<ActionResult<Topic>> PostTopic(CreateTopicDto createTopicDto)
@@ -37,7 +37,7 @@ namespace ForumApi.Controllers
             return StatusCode(201, topic);
         }
 
-        // GET method
+        // GET
 
         [HttpGet("Get")]
 
@@ -47,7 +47,7 @@ namespace ForumApi.Controllers
             return Ok(topics);
         }
 
-        // DELETE method
+        // DELETE
 
         [HttpDelete("Delete")]
 
@@ -62,6 +62,23 @@ namespace ForumApi.Controllers
                 return Ok(new { message = "Sikeres törlés!" });
             }
             return NotFound(new { message = "Nincs ilyen comment." });
+        }
+
+        // PUT
+
+        [HttpPut("{id}")]
+
+        public async Task<ActionResult<Topic>> Put(UpdateTopicDto updateTopicDto, int id) {
+            var existingTop = await _forumContext.Topics.FirstOrDefaultAsync(top => top.Id == id);
+
+            if (existingTop != null) {
+                existingTop.Title = updateTopicDto.Title;
+                existingTop.Description = updateTopicDto.Description;
+                _forumContext.Topics.Update(existingTop);
+                await _forumContext.SaveChangesAsync();
+                return Ok(existingTop);
+            }
+            return NotFound();
         }
     }
 }
