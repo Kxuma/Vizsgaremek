@@ -1,10 +1,24 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from './Navbar';
+import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
  
 
-export default function UjTema() {
+export default function UjTema({topics, fetchTopics}) {
   const [topicName, setTopicName] = useState("");  // Téma neve
   const [description, setDescription] = useState(""); // Téma leírása
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    if(!token) {
+      navigate("/")
+    }
+  
+  }, [])
+  
+  
 
   // Téma létrehozásának kezelése
   const handleCreateTopic = () => {
@@ -17,8 +31,23 @@ export default function UjTema() {
     console.log("Új téma neve:", topicName);
     console.log("Téma leírása:", description);
 
-    // Ezt módosíthatod a téma hozzáadásának logikájával (például API hívás)
-    alert("Új téma sikeresen létrejött!");
+    const topic = {
+      title: topicName,
+      description: description,
+      uid: jwtDecode(token).sub
+    }
+
+    console.log(topic);
+    
+
+    axios.post("https://localhost:7260/api/Topic/Post", topic)
+    .then(() => {
+      alert("Új téma sikeresen létrejött!");
+      fetchTopics();
+    })
+    .catch((error) => {
+      console.error("Hiba a küldéskor:", error);
+    })
 
     // Alapértelmezett értékek ürítése a mezőkben
     setTopicName("");
@@ -27,7 +56,7 @@ export default function UjTema() {
 
   return (
     <div>
-      <Navbar/> 
+      <Navbar topics={topics} /> 
       
       <div className="content"/*itt is volt az a fos*/>
         <h1>Új téma létrehozása</h1>

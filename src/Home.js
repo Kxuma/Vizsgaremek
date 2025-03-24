@@ -2,18 +2,27 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 import Navbar from "./Navbar";
 
-export default function Home() {
+export default function Home({topics, }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const [selectedTopic, setSelectedTopic] = useState("");
+  const [selectedTopic, setSelectedTopic] = useState(null);
   const [userId, setUserId] = useState(null); // A bejelentkezett felhasználó
-  const [userName, setUserName] = useState(null); // A bejelentkezett felhasználó
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  let token = null;
+  const [userName, setUserName] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const token = localStorage.getItem("token");
+  
+  console.log(topics);
 
-  if (isLoggedIn) {
-    token = localStorage.getItem("token");
-  }
+  useEffect(() => {
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, [token]);
+  
+useEffect(() => {
+  setUserName(localStorage.getItem("username"));
+}, [isLoggedIn])
+
 
 
   // Kommentek lekérése a backendből (GET metódus)
@@ -22,7 +31,7 @@ export default function Home() {
       .then((response) => response.json())
       .then((data) => setComments(data))
       .catch((error) => console.error("Error fetching comments:", error));
-  }, [isLoggedIn]);
+  }, []);
 
   // Kommentek hozzáadása a backendbe (POST metódus)
   const handleAddComment = () => {
@@ -85,28 +94,14 @@ export default function Home() {
     }
   };
 
-  // Bejelentkezés kezelése
-  const handleLogin = (userId, userName) => {
-    setUserId(userId); // A bejelentkezett felhasználó id-ját tároljuk
-    setUserName(userName); // A bejelentkezett felhasználó nevét tároljuk
-    localStorage.setItem("userId", userId);
-    localStorage.setItem("userName", userName);
-  };
-
-  // Regisztráció kezelése
-  const handleRegister = (userId) => {
-    setUserId(userId); // A regisztrált felhasználó nevét tároljuk
-    localStorage.setItem("userId", userId);
-  };
-
   return (
     <div>
-      <Navbar onSelectTopic={handleTopicSelect} setIsLoggedIn={setIsLoggedIn} />
+      <Navbar setIsLoggedIn={setIsLoggedIn} onSelectTopic={handleTopicSelect} topics={topics}/>
 
       <div className="content" >
-        <h1>{selectedTopic === "0" ? "React" : selectedTopic === "1" ? "JavaScript" : selectedTopic === "2" ? "CSS" : "Fórum"}</h1>
+        <h1>{(topics != null && selectedTopic != null) ? `${topics.find((topic) => topic.id == selectedTopic).title}` : "Fórum"}</h1>
 
-        {userName ? <p>Üdvözlünk, {userName}!</p> : <p>Nem vagy bejelentkezve</p>}
+        {isLoggedIn ? <p>Üdvözlünk, {userName}!</p> : <p>Nem vagy bejelentkezve</p>}
 
         {isLoggedIn ?
           <div>

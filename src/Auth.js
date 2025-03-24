@@ -93,7 +93,7 @@ const Auth = ({ onClose, setIsLoggedIn }) => {
       console.log(response);
       localStorage.setItem("username", response.result.userName);
       localStorage.setItem("token", response.token);
-      setIsLoggedIn(true)
+      setIsLoggedIn(true);
       onClose()
 
     })
