@@ -1,7 +1,10 @@
-﻿using ForumApi.Services.Dtos;
+﻿using ForumApi.Models;
+using ForumApi.Services.Dtos;
 using ForumApi.Services.IAuthService;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ForumApi.Controllers
 {
@@ -10,10 +13,20 @@ namespace ForumApi.Controllers
     public class UserController : ControllerBase
     {
         private readonly IAuth auth;
+        private readonly UserManager<ApplicationUser> userManager;
 
-        public UserController(IAuth auth)
+        public UserController(IAuth auth, UserManager<ApplicationUser> userManager)
         {
             this.auth = auth;
+            this.userManager = userManager;
+        }
+
+        [HttpGet("Get")]
+
+        public async Task<ActionResult<List<ApplicationUser>>> GetAllTopics()
+        {
+            var users  = await userManager.Users.ToListAsync();
+            return Ok(users);
         }
 
         [HttpPost("Register")]
