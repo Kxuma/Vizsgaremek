@@ -1,37 +1,41 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import Navbar from "./Navbar";
+import axios from "axios";
 
-export default function Home({topics, }) {
+export default function Home({selectedTopic, isLoggedIn, topics}) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const [selectedTopic, setSelectedTopic] = useState(null);
-  const [userId, setUserId] = useState(null); // A bejelentkezett felhasználó
-  const [userName, setUserName] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [selectedTopicData, setSelectedTopicData] = useState({title: "", id: ""});
+
+  const userId = localStorage.getItem("userId");
+  const userName = localStorage.getItem("username");
   const token = localStorage.getItem("token");
+
+  console.log(comments);
   
-  console.log(topics);
 
   useEffect(() => {
-    if (token) {
-      setIsLoggedIn(true);
-    }
-  }, [token]);
-  
-useEffect(() => {
-  setUserName(localStorage.getItem("username"));
-}, [isLoggedIn])
+    setSelectedTopicData({
+      title: !selectedTopic ? "Fórum" : topics.find((topic) => topic.id == selectedTopic).title,
+      id: !selectedTopic ? "0" : topics.find((topic) => topic.id == selectedTopic).id
+    })
 
-
+    GetComments();
+  }, [selectedTopic])
 
   // Kommentek lekérése a backendből (GET metódus)
-  useEffect(() => {
+  function GetComments() {
     fetch("https://localhost:7260/api/Comment/Get")
       .then((response) => response.json())
-      .then((data) => setComments(data))
+      .then((data) => {
+        console.log(data);
+        
+        const filteredComments = data.filter((comment) => comment.tId == selectedTopicData.id)
+        setComments(filteredComments);
+      })
       .catch((error) => console.error("Error fetching comments:", error));
-  }, []);
+  }
 
   // Kommentek hozzáadása a backendbe (POST metódus)
   const handleAddComment = () => {
@@ -43,63 +47,44 @@ useEffect(() => {
     const newEntry = {
       text: newComment.trim(),
       uId: userId || "0",
-      tId: Number(selectedTopic),  // A választott téma
+      tId: Number(selectedTopicData.id),  // A választott téma
     };
 
     console.log("Küldött adat:", newEntry);  // Ellenőrzés a konzolban
 
-    fetch("https://localhost:7260/api/Comment/Post", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newEntry),
-    })
+    axios.post("https://localhost:7260/api/Comment/Post", newEntry)
       .then((response) => {
-        if (!response.ok) {
-          throw new Error("Hiba történt a hozzászólás mentésekor");
-        }
-        return response.json();  // A válasz JSON formátumban
-      })
-      .then((data) => {
-        console.log("Válasz a POST kérésből:", data);  // Ellenőrzés
-        setComments((prevComments) => [...prevComments, data]);  // Frissíti a kommentek listáját
-        setNewComment("");  // Üríti a kommentet
+        console.log("Válasz a POST kérésből:", response.data); // Ellenőrzés
+        setComments((prevComments) => [...prevComments, response.data]); // Frissíti a kommentek listáját
+        setNewComment(""); // Üríti a kommentet
       })
       .catch((error) => {
-        console.error("Hiba a komment hozzáadásakor:", error);
+        console.error("Hiba a komment hozzáadásakor:", error.response?.data?.message || error.message);
         alert("Nem sikerült a hozzászólás mentése!");
       });
   };
 
   // Komment törlése (DELETE metódus)
   const handleDeleteComment = (commentId) => {
-    fetch(`https://localhost:7260/api/Comment/Delete?id=${commentId}`, {
-      method: "DELETE",
+    axios.delete(`https://localhost:7260/api/Comment/Delete`, {
+      params: { id: commentId } // Paraméter átadása
     })
       .then((response) => {
-        if (response.ok) {
-          setComments(comments.filter((comment) => comment.id !== commentId));
+        if (response.status === 200) {
+          setComments((prevComments) => prevComments.filter((comment) => comment.id !== commentId));
         } else {
           alert("Hiba történt a komment törlésekor.");
         }
       })
-      .catch((error) => console.error("Hiba a komment törlésénél:", error));
+      .catch((error) => console.error("Hiba a komment törlésénél:", error.response?.data?.message || error.message));
   };
 
-  const handleTopicSelect = (topic) => {
-    console.log(topic);
-    if (topic !== selectedTopic) {
-      setSelectedTopic(topic);
-    }
-  };
 
   return (
     <div>
-      <Navbar setIsLoggedIn={setIsLoggedIn} onSelectTopic={handleTopicSelect} topics={topics}/>
 
       <div className="content" >
-        <h1>{(topics != null && selectedTopic != null) ? `${topics.find((topic) => topic.id == selectedTopic).title}` : "Fórum"}</h1>
+        <h1>{selectedTopicData.title}</h1>
 
         {isLoggedIn ? <p>Üdvözlünk, {userName}!</p> : <p>Nem vagy bejelentkezve</p>}
 

@@ -8,6 +8,7 @@ const Navbar = ({ onSelectTopic, topics, setIsLoggedIn }) => {
   const [showAuth, setShowAuth] = useState(false); // Auth űrlap megjelenítése
   const token = localStorage.getItem("token");
   const navigate = useNavigate();
+  const role = localStorage.getItem("role");
 
   console.log(topics);
 
@@ -19,7 +20,7 @@ const Navbar = ({ onSelectTopic, topics, setIsLoggedIn }) => {
   }
 
 
-  
+
 
   return (
     <div>
@@ -27,10 +28,10 @@ const Navbar = ({ onSelectTopic, topics, setIsLoggedIn }) => {
         <div className="navbar-left">
           {/* Témák legördülő menüje */}
           <img id="imgNyul" src="/nyul.ico" alt="LogokKep" />
-          <select onChange={(e) => onSelectTopic(e.target.value)} defaultValue="">
-                <option value="" disabled>
-                  Válassz témát
-                </option>
+          <select className="topic-select" onChange={(e) => onSelectTopic(e.target.value)} defaultValue="">
+            <option value="" disabled>
+              Válassz témát
+            </option>
             {
               topics.map((topic) => (
                 <option title={topic.description} key={topic.id} value={topic.id}>
@@ -40,40 +41,48 @@ const Navbar = ({ onSelectTopic, topics, setIsLoggedIn }) => {
             }
           </select>
           {token ? (
-                      <Link to='/UjTema' className='btn btn-sm btn-outline-secondary'>
-            Új téma létrehozása
-          </Link>
+            <div className="topic-select">
+            <Link to='/UjTema' className='btn btn-sm btn-outline-secondary'>
+              Új téma létrehozása
+            </Link>
+            </div>
+          ) : null}
+
+          {token && role === "Admin" ? (
+            <Link to="/Admin" className="btn btn-sm btn-outline-primary">
+              Admin felület
+            </Link>
           ) : null}
 
         </div>
 
         <div className="navbar-right">
 
-          
 
 
 
-          
+
+
           {/* Bejelentkezés / Regisztráció gombok */}
           {token ? <button className="loginBtn" onClick={handleLogout}>Kijelentkezés</button> : (
-            <button className="loginBtn" onClick={() => {setShowAuth(true)}}>
+            <button className="loginBtn" onClick={() => { setShowAuth(true) }}>
               Bejelentkezés / Regisztráció
             </button>
-            )
+          )
           }
         </div>
 
         {/* Auth komponens */}
 
       </nav>
-      
+
       {showAuth && (
         <div>
           <div
             className="auth-overlay"
             onClick={() => setShowAuth(false)}
           ></div>
-          <Auth setIsLoggedIn={setIsLoggedIn} onClose={() => setShowAuth(false)}/>
+          <Auth setIsLoggedIn={setIsLoggedIn} onClose={() => setShowAuth(false)} />
         </div>
       )}
     </div>

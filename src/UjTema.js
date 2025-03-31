@@ -5,18 +5,18 @@ import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
  
 
-export default function UjTema({topics, fetchTopics}) {
+export default function UjTema({topics, fetchTopics, isLoggedIn}) {
   const [topicName, setTopicName] = useState("");  // Téma neve
   const [description, setDescription] = useState(""); // Téma leírása
   const navigate = useNavigate();
   const token = localStorage.getItem("token");
 
   useEffect(() => {
-    if(!token) {
+    if(!isLoggedIn) {
       navigate("/")
     }
   
-  }, [])
+  }, [isLoggedIn])
   
   
 
@@ -56,7 +56,6 @@ export default function UjTema({topics, fetchTopics}) {
 
   return (
     <div>
-      <Navbar topics={topics} /> 
       
       <div className="content"/*itt is volt az a fos*/>
         <h1>Új téma létrehozása</h1>

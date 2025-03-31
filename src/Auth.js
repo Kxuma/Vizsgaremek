@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import './Auth.css';
+import axios from 'axios';
+import { jwtDecode } from 'jwt-decode';
 
 const Auth = ({ onClose, setIsLoggedIn }) => {
   const [currentForm, setCurrentForm] = useState(null);
@@ -42,25 +44,17 @@ const Auth = ({ onClose, setIsLoggedIn }) => {
       password,
     };
 
-    fetch("https://localhost:7260/api/Users/Register", {
-      method: "POST",
+    axios.post("https://localhost:7260/api/Users/Register", newUser, {
       headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newUser),
+        "Content-Type": "application/json"
+      }
     })
       .then((response) => {
-        if (!response.ok) {
-          throw new Error('Hiba történt a regisztráció során');
-        }
-        return response.json();
-      })
-      .then((data) => {
         alert('Sikeres regisztráció! Most jelentkezz be.');
         setCurrentForm('login'); // A regisztráció után a bejelentkezés formra váltunk
       })
       .catch((error) => {
-        setError(error.message); // Hibakezelés
+        setError(error.response?.data?.message || 'Hiba történt a regisztráció során'); // Hibakezelés
       });
   };
 
@@ -79,24 +73,20 @@ const Auth = ({ onClose, setIsLoggedIn }) => {
       password: password
     }
 
-    fetch("https://localhost:7260/api/Users/Login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    })
-    .then(function (response) {
-      return response.json()
-    })
-    .then(function (response) {
-      console.log(response);
-      localStorage.setItem("username", response.result.userName);
-      localStorage.setItem("token", response.token);
-      setIsLoggedIn(true);
-      onClose()
-
-    })
+    axios.post("https://localhost:7260/api/Users/Login", user)
+      .then((response) => {
+        console.log(response.data);
+        localStorage.setItem("username", response.data.result.userName);
+        localStorage.setItem("token", response.data.token);
+        console.log(jwtDecode((response.data.token)).sub);
+        localStorage.setItem("role", jwtDecode((response.data.token)).role);
+        localStorage.setItem("userId", jwtDecode((response.data.token)).sub);
+        setIsLoggedIn(true);
+        onClose();
+      })
+      .catch((error) => {
+        console.error("Hiba történt a bejelentkezés során:", error.response?.data?.message || error.message);
+      });
 
     
     setCurrentForm(null);

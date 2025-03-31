@@ -60,3 +60,7 @@
 .loginBtn{
   position: fixed;
 }
+
+.topic-select {
+  margin: 5px;
+}
