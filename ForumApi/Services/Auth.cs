@@ -53,7 +53,7 @@ namespace ForumApi.Services
                 return new { result = new { user.UserName, user.Email }, message = "Sikeres beléptetés.", token = jwtToken };
             }
 
-            return new { result = "", message = "Nem regisztrált.", token = "" };
+            return null;
         }
 
         public async Task<object> Register(RegisterRequestDto registerRequestDto)
@@ -76,7 +76,7 @@ namespace ForumApi.Services
                 return new { result = userReturn, message = "Sikeres regisztráció." };
             }
 
-            return new { result = "", message = result.Errors.FirstOrDefault().Description };
+            return null;
 
         }
     }

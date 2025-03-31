@@ -1,6 +1,37 @@
 [
   {
     "ContainingType": "ForumApi.Controllers.CommentController",
+    "Method": "Put",
+    "RelativePath": "api/Comment/{id}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "updateCommentDto",
+        "Type": "ForumApi.Models.Dto\u002BUpdateCommentDto",
+        "IsRequired": true
+      },
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "ForumApi.Models.Comment",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "ForumApi.Controllers.CommentController",
     "Method": "DeleteComment",
     "RelativePath": "api/Comment/Delete",
     "HttpMethod": "DELETE",
