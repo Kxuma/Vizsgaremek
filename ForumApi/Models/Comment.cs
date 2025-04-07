@@ -15,5 +15,7 @@ public partial class Comment
 
     public DateTime CreatedTime { get; set; }
 
+    public string Author { get; set; } = null!;
+
 
 }

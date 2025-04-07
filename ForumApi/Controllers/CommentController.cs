@@ -27,6 +27,7 @@ namespace ForumApi.Controllers {
                 TId = createCommentDto.TId,
                 Text = createCommentDto.Text,
                 CreatedTime = DateTime.Now,
+                Author = createCommentDto.Author,
             };
 
             _forumContext.Comments.Add(comment);
