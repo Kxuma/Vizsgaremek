@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import Navbar from "./Navbar";
 import axios from "axios";
 
-export default function Home({selectedTopic, isLoggedIn, topics}) {
+export default function Home({ selectedTopic, isLoggedIn, topics }) {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const [selectedTopicData, setSelectedTopicData] = useState({title: "", id: ""});
+  const [selectedTopicData, setSelectedTopicData] = useState({ title: "", id: "" });
+  const [errorMessage, setErrorMessage] = useState("");
 
   const userId = localStorage.getItem("userId");
   const userName = localStorage.getItem("username");
   const token = localStorage.getItem("token");
+  const role = localStorage.getItem("role");
 
   console.log(comments);
-  
+
 
   useEffect(() => {
     setSelectedTopicData({
@@ -26,12 +27,12 @@ export default function Home({selectedTopic, isLoggedIn, topics}) {
 
   // Kommentek lekérése a backendből (GET metódus)
   function GetComments() {
-    fetch("https://localhost:7260/api/Comment/Get")
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        
-        const filteredComments = data.filter((comment) => comment.tId == selectedTopicData.id)
+    setErrorMessage("");
+    axios.get(`${process.env.REACT_APP_BASE_URL}/api/Comment/Get`)
+      .then((response) => {
+        console.log(response.data);
+
+        const filteredComments = response.data.filter((comment) => comment.tId == selectedTopic)
         setComments(filteredComments);
       })
       .catch((error) => console.error("Error fetching comments:", error));
@@ -40,19 +41,20 @@ export default function Home({selectedTopic, isLoggedIn, topics}) {
   // Kommentek hozzáadása a backendbe (POST metódus)
   const handleAddComment = () => {
     if (newComment.trim() === "") {
-      alert("Nem küldhetsz üres hozzászólást!");
+      setErrorMessage("Nem küldhetsz üres hozzászólást!");
       return;
     }
 
     const newEntry = {
       text: newComment.trim(),
       uId: userId || "0",
+      author: userName,
       tId: Number(selectedTopicData.id),  // A választott téma
     };
 
     console.log("Küldött adat:", newEntry);  // Ellenőrzés a konzolban
 
-    axios.post("https://localhost:7260/api/Comment/Post", newEntry)
+    axios.post(`${process.env.REACT_APP_BASE_URL}/api/Comment/Post`, newEntry)
       .then((response) => {
         console.log("Válasz a POST kérésből:", response.data); // Ellenőrzés
         setComments((prevComments) => [...prevComments, response.data]); // Frissíti a kommentek listáját
@@ -66,7 +68,7 @@ export default function Home({selectedTopic, isLoggedIn, topics}) {
 
   // Komment törlése (DELETE metódus)
   const handleDeleteComment = (commentId) => {
-    axios.delete(`https://localhost:7260/api/Comment/Delete`, {
+    axios.delete(`${process.env.REACT_APP_BASE_URL}/api/Comment/Delete`, {
       params: { id: commentId } // Paraméter átadása
     })
       .then((response) => {
@@ -86,9 +88,13 @@ export default function Home({selectedTopic, isLoggedIn, topics}) {
       <div className="content" >
         <h1>{selectedTopicData.title}</h1>
 
-        {isLoggedIn ? <p>Üdvözlünk, {userName}!</p> : <p>Nem vagy bejelentkezve</p>}
+        {isLoggedIn ? <p>Üdvözlünk, {userName}!</p> : <p>Nem vagy bejelentkezve.</p>}
 
-        {isLoggedIn ?
+        {!isLoggedIn ? (
+          <p>Addig nem tudsz hozzászólást írni, amíg nem vagy bejelentkezve!</p>
+        ) : !selectedTopic ? (
+          <p>Válassz ki egy témát a hozzászóláshoz!</p>
+        ) : (
           <div>
             <textarea
               value={newComment}
@@ -99,8 +105,9 @@ export default function Home({selectedTopic, isLoggedIn, topics}) {
             />
             <br />
             <button className="commentButton" onClick={handleAddComment}>Hozzászólás</button>
+            {errorMessage && <p className="error-message pt-3">{errorMessage}</p>}
           </div>
-          : <p>Addig nem tudsz hozzászólást írni amíg nem vagy bejelentkezve!</p>}
+        )}
 
         <h2>Hozzászólások:</h2>
         <ul>
@@ -110,14 +117,22 @@ export default function Home({selectedTopic, isLoggedIn, topics}) {
             comments.map((comment) => (
               <li key={comment.id} className="comment">
                 <strong>{comment.author}:</strong> {comment.text}
-                <button className="KukaIcon"
-                  onClick={() => handleDeleteComment(comment.id)}
-                  style={{ marginLeft: "10px", color: "red" }}
-                >
-                   <svg  xmlns="http://www.w3.org/2000/svg" width="16" height="16"  fill="currentColor" class="bi bi-trash-fill" viewBox="0 0 16 16">
-                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
-                  </svg>
-                </button>
+                {(isLoggedIn && (role === "Admin" || comment.uId === userId)) && (
+                  <button className="KukaIcon"
+                    onClick={() => handleDeleteComment(comment.id)}
+                    style={{ marginLeft: "10px", color: "red" }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-trash-fill" viewBox="0 0 16 16">
+                      <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5M8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5m3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0" />
+                    </svg>
+                  </button>
+                )}
+                {comment.uId === userId && (
+                  <span className="ownComment"> Saját hozzászólás </span>
+                )}
+                {comment.author === "Admin" && (
+                  <span className="adminComment"> Admin hozzászólás </span>
+                )}
               </li>
             ))
           )}

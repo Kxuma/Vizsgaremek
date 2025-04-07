@@ -12,7 +12,7 @@ const Auth = ({ onClose, setIsLoggedIn }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState('');
-  const navigate = useNavigate()
+  const [success, setSuccess] = useState('');
 
   // Regisztrációs adatokat küldő függvény
   const handleRegister = (e) => {
@@ -44,21 +44,21 @@ const Auth = ({ onClose, setIsLoggedIn }) => {
       password,
     };
 
-    axios.post("https://localhost:7260/api/Users/Register", newUser, {
+    axios.post(`${process.env.REACT_APP_BASE_URL}/api/Users/Register`, newUser, {
       headers: {
         "Content-Type": "application/json"
       }
     })
-      .then((response) => {
-        alert('Sikeres regisztráció! Most jelentkezz be.');
+      .then(() => {
+        setSuccess('Sikeres regisztráció! Most jelentkezz be.');
         setCurrentForm('login'); // A regisztráció után a bejelentkezés formra váltunk
       })
       .catch((error) => {
-        setError(error.response?.data?.message || 'Hiba történt a regisztráció során'); // Hibakezelés
+        setError(error.response?.data?.message || 'Hiba történt a regisztráció során');
       });
   };
 
-  // Bejelentkezési függvény (példaként)
+  // Bejelentkezési függvény
   const handleLogin = (e) => {
     e.preventDefault();
     setError('');
@@ -73,23 +73,23 @@ const Auth = ({ onClose, setIsLoggedIn }) => {
       password: password
     }
 
-    axios.post("https://localhost:7260/api/Users/Login", user)
+    axios.post(`${process.env.REACT_APP_BASE_URL}/api/Users/Login`, user)
       .then((response) => {
         console.log(response.data);
         localStorage.setItem("username", response.data.result.userName);
         localStorage.setItem("token", response.data.token);
-        console.log(jwtDecode((response.data.token)).sub);
-        localStorage.setItem("role", jwtDecode((response.data.token)).role);
-        localStorage.setItem("userId", jwtDecode((response.data.token)).sub);
+        const decoded = jwtDecode(response.data.token);
+        localStorage.setItem("role", decoded.role);
+        localStorage.setItem("userId", decoded.sub);
         setIsLoggedIn(true);
         onClose();
+        setCurrentForm(null);
       })
       .catch((error) => {
+        const errMsg = error.response?.data?.message || 'Hibás felhasználónév vagy jelszó.';
         console.error("Hiba történt a bejelentkezés során:", error.response?.data?.message || error.message);
+        setError(errMsg);
       });
-
-    
-    setCurrentForm(null);
   };
 
   // Formok váltása (login / register)
@@ -106,6 +106,7 @@ const Auth = ({ onClose, setIsLoggedIn }) => {
   return (
     <div className="auth-container">
       {error && <p className="error-message">{error}</p>}
+      {success && <p className="success-message">{success}</p>}
 
       {currentForm === null && (
         <div className="auth-buttons">

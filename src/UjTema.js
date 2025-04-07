@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from './Navbar';
 import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
  
 
 export default function UjTema({topics, fetchTopics, isLoggedIn}) {
-  const [topicName, setTopicName] = useState("");  // Téma neve
-  const [description, setDescription] = useState(""); // Téma leírása
+  const [topicName, setTopicName] = useState("");
+  const [description, setDescription] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
-  const token = localStorage.getItem("token");
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     if(!isLoggedIn) {
@@ -22,8 +23,19 @@ export default function UjTema({topics, fetchTopics, isLoggedIn}) {
 
   // Téma létrehozásának kezelése
   const handleCreateTopic = () => {
+
+    setErrorMessage("");
+    setSuccessMessage("");
+
+    const existing = topics.find(topic => topic.title.toLowerCase().trim() === topicName.toLowerCase().trim());
+
+    if (existing) {
+      setErrorMessage("Már létezik ilyen nevű téma!");
+      return;
+    }
+
     if (topicName.trim() === "" || description.trim() === "") {
-      alert("Minden mező kitöltése kötelező!");
+      setErrorMessage("Minden mező kitöltése kötelező!");
       return;
     }
 
@@ -34,30 +46,28 @@ export default function UjTema({topics, fetchTopics, isLoggedIn}) {
     const topic = {
       title: topicName,
       description: description,
-      uid: jwtDecode(token).sub
+      uid: userId
     }
 
     console.log(topic);
-    
 
-    axios.post("https://localhost:7260/api/Topic/Post", topic)
+    axios.post(`${process.env.REACT_APP_BASE_URL}/api/Topic/Post`, topic)
     .then(() => {
-      alert("Új téma sikeresen létrejött!");
+      setTopicName("");
+      setDescription("");
+      setSuccessMessage("Új téma sikeresen létrejött!");
       fetchTopics();
     })
     .catch((error) => {
-      console.error("Hiba a küldéskor:", error);
+      setErrorMessage("Hiba történt a téma létrehozásakor.");
+      console.error("Hiba a küldéskor: ", error);
     })
-
-    // Alapértelmezett értékek ürítése a mezőkben
-    setTopicName("");
-    setDescription("");
   };
 
   return (
     <div>
       
-      <div className="content"/*itt is volt az a fos*/>
+      <div className="content">
         <h1>Új téma létrehozása</h1>
         
         <div >
@@ -86,11 +96,11 @@ export default function UjTema({topics, fetchTopics, isLoggedIn}) {
 
         <button className='commentButton'
           onClick={handleCreateTopic} 
-          
-          
         >
           Téma létrehozása
         </button>
+        {errorMessage && <p className="error-message pt-3">{errorMessage}</p>}
+        {successMessage && <p className="success-message pt-3">{successMessage}</p>}
       </div>
     </div>
   );

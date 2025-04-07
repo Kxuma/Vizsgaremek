@@ -41,6 +41,13 @@ textarea {
   border-radius: 5px;
   box-sizing: border-box;
   background-color: #4c495d;
+  color: #d1d7E0;
+  box-shadow: 0 0 4px #802bb1;
+}
+
+label {
+  margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .commentButton {
@@ -54,6 +61,7 @@ textarea {
   border-radius: 5px;
   transition: background-color 0.3s ease;
   touch-action: manipulation;
+  box-shadow: 0 0 6px #802bb1;
 }
 
 #topicName{
@@ -62,6 +70,7 @@ textarea {
 }
 .commentButton:hover {
   background-color: #4c0275;
+  box-shadow: 0 0 6px #4c0275;
 }
 
 ul {
@@ -70,11 +79,13 @@ ul {
 }
 
 li {
-  background-color: #f9f9f9;
+  background-color: #2a0033;
   margin: 10px 0;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #ddd;
+  border: 1px solid #802bb1;
+  color: white;
+  box-shadow: 0 0 5px #802bb1;
   word-wrap: break-word;
 }
 
@@ -101,10 +112,73 @@ body.modal-open {
   width: 100vw;
 }
 
-.label{
-  color: #d1d7E0;
-}
 
 .KukaIcon{
-  border-radius: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #e40558;
+  transition: transform 0.2s ease;
 }
+
+.KukaIcon:hover {
+  transform: scale(1.2);
+  color: red;
+}
+
+.ownComment {
+  color: #802bb1;
+  margin-left: "10px";
+}
+
+.adminComment {
+  color: #e40558;
+  margin-left: "10px"
+}
+
+/* GYIK */
+
+.faq-item {
+  background-color: #2a0033;
+  border: 1px solid #802bb1;
+  border-radius: 10px;
+  padding: 15px 20px;
+  margin-bottom: 20px;
+  box-shadow: 0 0 10px #802bb1;
+  transition: transform 0.2s ease;
+}
+
+.faq-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px #e40558;
+}
+
+.faq-question {
+  color: #e40558;
+  margin-bottom: 10px;
+}
+
+.faq-answer {
+  color: #d1d7E0;
+  margin: 0;
+}
+
+/* Profil */
+
+.profileComment {
+  background-color: #2a0033;
+  border: 1px solid #802bb1;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  box-shadow: 0 0 6px #802bb1;
+  color: white;
+  opacity: 0;
+  animation: fadeIn 0.5s ease-in forwards;
+  will-change: opacity, transform;
+}
+
+.profileComment:hover {
+  box-shadow: 0 0 12px #e40558;
+}
+
